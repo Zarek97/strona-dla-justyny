@@ -96,8 +96,14 @@
 </head>
 <body>
   <h1>Dla Justyny ❤️</h1>
-  <div class="button-container" style="position: relative; height: 200px;">
+  <div class="button-container">
     <button class="btn" onclick="location.href='kwiatek.html'">Zobacz niespodziankę 🌷</button>
+    .btn {
+  display: block;       /* aby każdy przycisk zajmował całą linię */
+  margin: 10px auto;    /* margines góra/dół dla odstępu, auto centruje */
+  padding: 10px 20px;
+  width: 200px;         /* opcjonalnie, szerokość przycisku */
+}
     <button class="btn" onclick="location.href='quiz.html'">Quiz</button>
   </div>
 
