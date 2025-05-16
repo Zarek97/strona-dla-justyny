@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz dla Justyny</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
+      color: #d6006d;
+      text-align: center;
+      padding: 40px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .question {
+      margin: 20px 0;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .options {
+      margin: 10px 0 30px;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    button {
+      background-color: #ff3385;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #e6005c;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Quiz: Jak dobrze mnie znasz, Justynko? ❤️</h2>
+
+  <div id="quiz-container"></div>
+  <button id="next-btn">Dalej</button>
+
+  <script>
+    const quizData = [
+      {
+        question: "1. Od kiedy jesteśmy razem?",
+        options: ["20.03.2024", "20.04.2025", "20.03.2025", "20.04.2024"],
+        answer: "20.03.2025"
+      },
+      {
+        question: "2. Kiedy pierwszy raz się spotkaliśmy?",
+        options: ["17.04.2025", "29.03.2025", "05.04.2025", "17.03.2025"],
+        answer: "17.03.2025"
+      },
+      {
+        question: "3. Ile dzieci chce mieć Kacper?",
+        options: ["0", "2", "4", "1"],
+        answer: "2"
+      },
+      {
+        question: "4. Kiedy ma urodziny Kacper?",
+        options: ["01.01.2011", "01.10.2010", "10.01.2010", "01.01.2010"],
+        answer: "01.01.2010"
+      },
+      {
+        question: "5. Kiedy ma urodziny Justyna?",
+        options: ["29.03.2011", "29.04.2011", "29.01.2011", "02.09.2011"],
+        answer: "29.03.2011"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const quizContainer = document.getElementById('quiz-container');
+    const nextBtn = document.getElementById('next-btn');
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      quizContainer.innerHTML = `
+        <div class="question">${q.question}</div>
+        <div class="options">
+          ${q.options.map((opt, i) => `
+            <label>
+              <input type="radio" name="answer" value="${opt}" /> ${opt}
+            </label>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        alert("Wybierz odpowiedź, proszę! 😊");
+        return;
+      }
+
+      if (selected.value === quizData[currentQuestion].answer) {
+        score++;
+      }
+
+      currentQuestion++;
+
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        quizContainer.innerHTML = `
+          <h3>Twój wynik: ${score} z ${quizData.length}</h3>
+          <p>${score === quizData.length ? "Znasz mnie perfekcyjnie! 🥰" : "I tak Cię kocham! ❤️"}</p>
+        `;
+        nextBtn.style.display = 'none';
+      }
+    });
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>
