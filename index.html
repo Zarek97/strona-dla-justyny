@@ -8,7 +8,7 @@
     body {
       margin: 0;
       overflow: hidden;
-      background: linear-gradient(135deg, #5a0033, #8b0046);
+      background: linear-gradient(135deg, #33001a, #4b0033); /* bardzo ciemne bordo i fiolet */
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
@@ -16,41 +16,46 @@
       justify-content: center;
       height: 100vh;
       position: relative;
-      color: #d6006d;
+      color: #ffb6c1; /* jasny różowy - kontrast na ciemnym tle */
       text-align: center;
+      user-select: none;
     }
 
     h1 {
       z-index: 2;
-      font-size: 3em;
+      font-size: 3.5em;
       margin-bottom: 40px;
+      text-shadow: 0 0 8px #ff66aa;
     }
 
     .btn {
       padding: 15px 30px;
-      font-size: 1.2em;
+      font-size: 1.3em;
       background-color: #ff3385;
       color: white;
       border: none;
       border-radius: 30px;
       cursor: pointer;
       z-index: 2;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(255, 51, 133, 0.6);
       transition: background 0.3s ease;
+      user-select: none;
     }
 
     .btn:hover {
       background-color: #e6005c;
+      box-shadow: 0 6px 20px rgba(230, 0, 92, 0.8);
     }
 
     .heart {
       width: 20px;
       height: 20px;
       position: absolute;
-      background: red;
+      background: #ff1a75;
       transform: rotate(-45deg);
       animation: float 8s linear infinite;
       z-index: 1;
+      filter: drop-shadow(0 0 3px #ff3385);
     }
 
     .heart::before,
@@ -59,7 +64,7 @@
       width: 20px;
       height: 20px;
       position: absolute;
-      background: red;
+      background: #ff1a75;
       border-radius: 50%;
     }
 
