@@ -35,6 +35,7 @@
       border-radius: 25px;
       cursor: pointer;
       font-size: 1em;
+      margin: 10px;
     }
     button:hover {
       background-color: #e6005c;
@@ -47,33 +48,45 @@
 
   <div id="quiz-container"></div>
   <button id="next-btn">Dalej</button>
+  <br />
+  <a href="index.html"><button>Powrót na stronę główną</button></a>
 
   <script>
     const quizData = [
       {
         question: "1. Od kiedy jesteśmy razem?",
         options: ["20.03.2024", "20.04.2025", "20.03.2025", "20.04.2024"],
-        answer: "20.03.2025"
+        answer: "20.03.2025",
+        multiple: false
       },
       {
         question: "2. Kiedy pierwszy raz się spotkaliśmy?",
         options: ["17.04.2025", "29.03.2025", "05.04.2025", "17.03.2025"],
-        answer: "17.03.2025"
+        answer: "17.03.2025",
+        multiple: false
       },
       {
         question: "3. Ile dzieci chce mieć Kacper?",
         options: ["0", "2", "4", "1"],
-        answer: "2"
+        answer: "2",
+        multiple: false
       },
       {
         question: "4. Kiedy ma urodziny Kacper?",
         options: ["01.01.2011", "01.10.2010", "10.01.2010", "01.01.2010"],
-        answer: "01.01.2010"
+        answer: "01.01.2010",
+        multiple: false
       },
       {
-        question: "5. Kiedy ma urodziny Justyna?",
-        options: ["29.03.2011", "29.04.2011", "29.01.2011", "02.09.2011"],
-        answer: "29.03.2011"
+        question: "5. W co gram najczęściej?",
+        options: [
+          "Hearts Of Iron 4 (HOI4)",
+          "League Of Legends (LOL)",
+          "Counter Strike 2 (CS2)",
+          "Minecraft"
+        ],
+        answer: ["Hearts Of Iron 4 (HOI4)", "Counter Strike 2 (CS2)"],
+        multiple: true
       }
     ];
 
@@ -90,7 +103,7 @@
         <div class="options">
           ${q.options.map((opt, i) => `
             <label>
-              <input type="radio" name="answer" value="${opt}" /> ${opt}
+              <input type="${q.multiple ? 'checkbox' : 'radio'}" name="answer" value="${opt}" /> ${opt}
             </label>
           `).join('')}
         </div>
@@ -98,14 +111,22 @@
     }
 
     nextBtn.addEventListener('click', () => {
-      const selected = document.querySelector('input[name="answer"]:checked');
-      if (!selected) {
+      const q = quizData[currentQuestion];
+      const inputs = document.querySelectorAll('input[name="answer"]:checked');
+      if (inputs.length === 0) {
         alert("Wybierz odpowiedź, proszę! 😊");
         return;
       }
 
-      if (selected.value === quizData[currentQuestion].answer) {
-        score++;
+      const selectedValues = Array.from(inputs).map(input => input.value);
+
+      if (q.multiple) {
+        const correct = q.answer;
+        const allCorrect = correct.every(ans => selectedValues.includes(ans)) &&
+                           selectedValues.every(ans => correct.includes(ans));
+        if (allCorrect) score++;
+      } else {
+        if (selectedValues[0] === q.answer) score++;
       }
 
       currentQuestion++;
