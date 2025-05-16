@@ -1,49 +1,105 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dla Justyny</title>
+  <meta charset="UTF-8">
+  <title>Dla Justyny ❤️</title>
   <style>
     body {
-      background-color: #fff0f5;
+      margin: 0;
+      overflow: hidden;
+      background-color: #ffe6f0;
       font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      padding: 40px;
-      color: #444;
-      <div class="hearts-background"></div>
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
+
     h1 {
+      z-index: 2;
+      color: #d6006d;
       font-size: 3em;
-      color: #d63384;
+      margin-bottom: 40px;
     }
-    p {
+
+    .btn {
+      padding: 15px 30px;
       font-size: 1.2em;
-      margin: 20px 0;
+      background-color: #ff3385;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
     }
-    img {
-      width: 200px;
-      margin-top: 30px;
-      border-radius: 16px;
+
+    .btn:hover {
+      background-color: #e6005c;
     }
+
     .heart {
-      font-size: 2em;
-      color: red;
-      animation: pulse 1s infinite;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background: red;
+      transform: rotate(-45deg);
+      animation: float 8s linear infinite;
+      z-index: 1;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(-45deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Dla Ciebie, Justynko</h1>
-  <p>Nie jestem najlepszym programistą, ale zrobiłem tę stronę z serca – tylko dla Ciebie.</p>
-  <p>Jesteś jak róża i tulipan w jednym – piękna i wyjątkowa.</p>
-  <div class="heart">♥</div>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Araluen_Botanic_Park%2C_Roleystone.jpg" alt="Tulipan" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Rosa_%27La_France%27_%28Rosier%29_-_110_%28cropped%29.jpg" alt="Róża" />
+  <h1>Dla Justyny ❤️</h1>
+  <button class="btn" onclick="location.href='kwiatek'">Zobacz niespodziankę 🌷</button>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
 </body>
 </html>
