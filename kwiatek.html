@@ -5,99 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dla Justyny</title>
   <style>
+    /* Tło */
     body {
       margin: 0;
+      padding: 40px 20px 20px 20px;
       font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffcee7, #ffe6f0);
+      color: #d63384;
       text-align: center;
-      padding: 40px;
-      color: #444;
-      background: linear-gradient(270deg, #f8bbd0, #f48fb1, #ce93d8, #f8bbd0);
-      background-size: 800% 800%;
-      animation: gradientAnimation 20s ease infinite;
-      position: relative; /* dla przycisku */
+      overflow: hidden;
+      position: relative;
+      min-height: 100vh;
     }
-    @keyframes gradientAnimation {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+
+    /* Przyciski i nagłówki */
     h1 {
       font-size: 3em;
-      color: #d63384;
+      margin-bottom: 20px;
     }
     p {
       font-size: 1.2em;
       margin: 20px 0;
+      color: #444;
     }
+
+    /* Obrazki */
     img {
       width: 200px;
-      margin-top: 30px;
+      margin: 20px 15px 0 15px;
       border-radius: 16px;
+      box-shadow: 0 0 15px rgba(214, 51, 132, 0.4);
     }
+
+    /* Pulsujące serduszko */
     .heart {
       font-size: 2em;
       color: red;
       animation: pulse 1s infinite;
+      margin-top: 15px;
     }
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+
+    /* Przyciski */
     .btn {
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 30px;
-      background-color: #ff3385;
+      background-color: #d63384;
       color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 1em;
+      margin-top: 25px;
+      box-shadow: 0 4px 10px rgba(214, 51, 132, 0.4);
       transition: background-color 0.3s ease;
     }
     .btn:hover {
-      background-color: #e6005c;
+      background-color: #a82a65;
     }
-    /* Nowy styl dla przycisku powrotu */
+
+    /* Przyciski w lewym górnym rogu - powrót */
     .back-btn {
       position: fixed;
       top: 15px;
       left: 15px;
-      background-color: #ff3385;
+      background: transparent;
       border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      color: white;
-      font-size: 24px;
+      font-size: 2em;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s ease;
+      color: #d63384;
+      transition: color 0.3s ease;
       z-index: 10;
+      user-select: none;
     }
     .back-btn:hover {
-      background-color: #e6005c;
+      color: #a82a65;
     }
+
+    /* Animacja tła - bąbelki */
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 51, 133, 0.3);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation-name: rise;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
   </style>
 </head>
 <body>
 
   <!-- Przycisk powrotu -->
-  <button class="back-btn" onclick="location.href='index.html'" aria-label="Powrót na stronę główną">
-    ←
-  </button>
+  <button class="back-btn" onclick="location.href='index.html'" aria-label="Powrót do strony głównej">←</button>
 
-  <button class="btn" onclick="location.href='kwiatek/kwiatek.html'">Zobacz niespodziankę 🌷</button>
   <h1>Dla Ciebie, Justynko</h1>
   <p>Nie jestem najlepszym programistą, ale zrobiłem tę stronę z serca – tylko dla Ciebie.</p>
   <p>Jesteś jak róża i tulipan w jednym – piękna i wyjątkowa.</p>
   <div class="heart">♥</div>
   <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Araluen_Botanic_Park%2C_Roleystone.jpg" alt="Tulipan" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Rosa_%27La_France%27_%28Rosier%29_-_110_%28cropped%29.jpg" alt="Róża" />
+
+  <!-- Bąbelki w tle -->
+  <script>
+    const colors = ['rgba(255, 51, 133, 0.3)', 'rgba(214, 51, 132, 0.2)', 'rgba(255, 105, 180, 0.25)'];
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 40 + 20;
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.style.left = Math.random() * 100 + 'vw';
+      bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+      bubble.style.animationDuration = (5 + Math.random() * 10) + 's';
+      document.body.appendChild(bubble);
+
+      setTimeout(() => {
+        bubble.remove();
+      }, 15000);
+    }
+
+    setInterval(createBubble, 500);
+  </script>
 
 </body>
 </html>
