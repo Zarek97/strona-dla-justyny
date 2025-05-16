@@ -8,7 +8,7 @@
     body {
       margin: 0;
       overflow: hidden;
-      background: linear-gradient(135deg, #33001a, #4b0033); /* bardzo ciemne bordo i fiolet */
+      background-color: #d87093; /* ciemny, ale jasny róż */
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
@@ -16,46 +16,50 @@
       justify-content: center;
       height: 100vh;
       position: relative;
-      color: #ffb6c1; /* jasny różowy - kontrast na ciemnym tle */
+      color: #fce4ec; /* jaśniejszy tekst na tle */
       text-align: center;
-      user-select: none;
     }
 
     h1 {
       z-index: 2;
-      font-size: 3.5em;
+      font-size: 3em;
       margin-bottom: 40px;
-      text-shadow: 0 0 8px #ff66aa;
     }
 
     .btn {
       padding: 15px 30px;
-      font-size: 1.3em;
+      font-size: 1.2em;
       background-color: #ff3385;
       color: white;
       border: none;
       border-radius: 30px;
       cursor: pointer;
       z-index: 2;
-      box-shadow: 0 4px 15px rgba(255, 51, 133, 0.6);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: background 0.3s ease;
-      user-select: none;
+      margin: 0 10px;
     }
 
     .btn:hover {
       background-color: #e6005c;
-      box-shadow: 0 6px 20px rgba(230, 0, 92, 0.8);
+    }
+
+    /* Kontener przycisków obok siebie */
+    .button-container {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      z-index: 2;
     }
 
     .heart {
       width: 20px;
       height: 20px;
       position: absolute;
-      background: #ff1a75;
+      background: red;
       transform: rotate(-45deg);
       animation: float 8s linear infinite;
       z-index: 1;
-      filter: drop-shadow(0 0 3px #ff3385);
     }
 
     .heart::before,
@@ -64,7 +68,7 @@
       width: 20px;
       height: 20px;
       position: absolute;
-      background: #ff1a75;
+      background: red;
       border-radius: 50%;
     }
 
@@ -92,7 +96,10 @@
 </head>
 <body>
   <h1>Dla Justyny ❤️</h1>
-  <button class="btn" onclick="location.href='kwiatek/kwiatek.html'">Zobacz niespodziankę 🌷</button>
+  <div class="button-container">
+    <button class="btn" onclick="location.href='kwiatek/kwiatek.html'">Zobacz niespodziankę 🌷</button>
+    <button class="btn" onclick="location.href='quiz.html'">Quiz</button>
+  </div>
 
   <script>
     function createHeart() {
@@ -108,6 +115,6 @@
     }
 
     setInterval(createHeart, 300);
-  </script> 
+  </script>
 </body>
 </html>
