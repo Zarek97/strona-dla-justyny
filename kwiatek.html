@@ -6,11 +6,20 @@
   <title>Dla Justyny</title>
   <style>
     body {
-      background-color: #fff0f5;
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       padding: 40px;
       color: #444;
+      background: linear-gradient(270deg, #f8bbd0, #f48fb1, #ce93d8, #f8bbd0);
+      background-size: 800% 800%;
+      animation: gradientAnimation 20s ease infinite;
+      position: relative; /* dla przycisku */
+    }
+    @keyframes gradientAnimation {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
     h1 {
       font-size: 3em;
@@ -35,14 +44,60 @@
       50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
+    .btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff3385;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #e6005c;
+    }
+    /* Nowy styl dla przycisku powrotu */
+    .back-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background-color: #ff3385;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+      z-index: 10;
+    }
+    .back-btn:hover {
+      background-color: #e6005c;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Przycisk powrotu -->
+  <button class="back-btn" onclick="location.href='index.html'" aria-label="Powrót na stronę główną">
+    ←
+  </button>
+
+  <button class="btn" onclick="location.href='kwiatek/kwiatek.html'">Zobacz niespodziankę 🌷</button>
   <h1>Dla Ciebie, Justynko</h1>
   <p>Nie jestem najlepszym programistą, ale zrobiłem tę stronę z serca – tylko dla Ciebie.</p>
   <p>Jesteś jak róża i tulipan w jednym – piękna i wyjątkowa.</p>
   <div class="heart">♥</div>
   <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Araluen_Botanic_Park%2C_Roleystone.jpg" alt="Tulipan" />
   <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Rosa_%27La_France%27_%28Rosier%29_-_110_%28cropped%29.jpg" alt="Róża" />
+
 </body>
 </html>
