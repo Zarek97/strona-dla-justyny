@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galeria z Justyną 💑</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #d87093;
+      color: #fff;
+      position: relative;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+
+    .carousel {
+      z-index: 2;
+    }
+
+    .carousel img {
+      width: 300px;
+      height: 200px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      object-fit: cover;
+      transition: opacity 0.5s ease;
+    }
+
+    .carousel-buttons {
+      margin-top: 15px;
+    }
+
+    .carousel-buttons button {
+      background-color: #ff3385;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 25px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-buttons button:hover {
+      background-color: #c9005b;
+    }
+
+    /* Tło animowane */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      animation: spin 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .circle1 {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      left: -100px;
+    }
+
+    .circle2 {
+      width: 200px;
+      height: 200px;
+      bottom: 10%;
+      right: -80px;
+      animation-duration: 25s;
+    }
+
+    .circle3 {
+      width: 150px;
+      height: 150px;
+      top: 30%;
+      right: 20px;
+      animation-duration: 18s;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Galeria wspomnień z Justyną 💖</h1>
+
+  <div class="carousel">
+    <img id="carousel-image" src="https://via.placeholder.com/300x200?text=Zdjęcie+1" alt="Galeria Justyny" />
+    <div class="carousel-buttons">
+      <button onclick="prevImage()">⟵</button>
+      <button onclick="nextImage()">⟶</button>
+    </div>
+  </div>
+
+  <!-- Animowane kręgi w tle -->
+  <div class="circle circle1"></div>
+  <div class="circle circle2"></div>
+  <div class="circle circle3"></div>
+
+  <script>
+    const images = [
+      "https://via.placeholder.com/300x200?text=Zdjęcie+1",
+      "https://via.placeholder.com/300x200?text=Zdjęcie+2",
+      "https://via.placeholder.com/300x200?text=Zdjęcie+3"
+      // Dodaj więcej zdjęć tutaj
+    ];
+    let current = 0;
+
+    function showImage(index) {
+      const img = document.getElementById("carousel-image");
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = images[index];
+        img.style.opacity = 1;
+      }, 200);
+    }
+
+    function nextImage() {
+      current = (current + 1) % images.length;
+      showImage(current);
+    }
+
+    function prevImage() {
+      current = (current - 1 + images.length) % images.length;
+      showImage(current);
+    }
+
+    showImage(current);
+  </script>
+</body>
+</html>
+
